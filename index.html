@@ -1102,31 +1102,56 @@
     </div>
 
     <div>
-      <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre completo">
-      </div>
-      <div class="form-group">
-        <label>Servicio que necesitás</label>
-        <select>
-          <option value="" disabled selected>Seleccioná un servicio</option>
-          <option>Limpieza de PC</option>
-          <option>Instalación de Sistema Operativo</option>
-          <option>Optimización del sistema</option>
-          <option>Instalación de programas</option>
-          <option>Armado de PC</option>
-          <option>Limpieza de consola</option>
-          <option>Otro / Consulta general</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Descripción del problema (opcional)</label>
-        <textarea placeholder="Contanos qué le pasa a tu equipo o qué necesitás..."></textarea>
-      </div>
-      <button class="form-submit" onclick="alert('¡Mensaje enviado! Te contactamos pronto 🚀')">
-        Enviar Consulta →
-      </button>
-    </div>
+  <div class="form-group">
+    <label>Nombre</label>
+    <input id="nombre" type="text" placeholder="Tu nombre completo">
+  </div>
+
+  <div class="form-group">
+    <label>Servicio que necesitás</label>
+    <select id="servicio">
+      <option value="" disabled selected>Seleccioná un servicio</option>
+      <option>Limpieza de PC</option>
+      <option>Instalación de Sistema Operativo</option>
+      <option>Optimización del sistema</option>
+      <option>Instalación de programas</option>
+      <option>Armado de PC</option>
+      <option>Limpieza de consola</option>
+      <option>Otro / Consulta general</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Descripción del problema (opcional)</label>
+    <textarea id="descripcion" placeholder="Contanos qué le pasa a tu equipo o qué necesitás..."></textarea>
+  </div>
+
+  <button class="form-submit" onclick="enviarWhatsapp()">
+    Enviar Consulta →
+  </button>
+</div>
+
+<script>
+function enviarWhatsapp() {
+  const nombre = document.getElementById("nombre").value;
+  const servicio = document.getElementById("servicio").value;
+  const descripcion = document.getElementById("descripcion").value;
+
+  const mensaje =
+`Hola, quiero realizar una consulta.
+
+👤 Nombre: ${nombre}
+🛠️ Servicio: ${servicio}
+
+📝 Descripción:
+${descripcion}`;
+
+  window.open(
+    `https://wa.me/5492215434702?text=${encodeURIComponent(mensaje)}`,
+    "_blank"
+  );
+}
+</script>
   </div>
 </section>
 
