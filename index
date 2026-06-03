@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFix — Servicio Técnico Profesional</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #18181f;
+    --accent: #00e5ff;
+    --accent2: #7b2fff;
+    --accent3: #ff2d78;
+    --text: #f0f0f8;
+    --text-muted: #7a7a9a;
+    --border: rgba(255,255,255,0.07);
+    --glow: 0 0 40px rgba(0,229,255,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID NOISE BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: var(--text);
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--bg) !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 700 !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 5% 5rem;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    pointer-events: none;
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,255,0.1) 0%, transparent 70%);
+    bottom: 50px;
+    left: 10%;
+    pointer-events: none;
+    animation: pulse 6s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.7; }
+  }
+
+  .hero-content { max-width: 700px; position: relative; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 .line2 {
+    -webkit-text-stroke: 1px var(--accent);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 500px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.35);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    background: rgba(0,229,255,0.05);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SCROLLING MARQUEE ── */
+  .marquee-wrap {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .marquee-dot { color: var(--accent); font-size: 1.2rem; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 7rem 5%;
+  }
+
+  .services-header {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .services-header p {
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .service-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover::before { opacity: 1; }
+  .service-card:hover { background: var(--surface2); }
+
+  .service-card:hover .service-icon {
+    transform: scale(1.1) rotate(-5deg);
+  }
+
+  .service-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    transition: transform 0.3s;
+  }
+
+  .service-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .service-line {
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 1.5rem;
+    transition: width 0.3s;
+  }
+
+  .service-card:hover .service-line { width: 60px; }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    padding: 7rem 5%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .how-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2.5rem;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--surface2);
+    -webkit-text-stroke: 1px var(--border);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 50px;
+    transition: color 0.3s, -webkit-text-stroke 0.3s;
+  }
+
+  .step:hover .step-num {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+  }
+
+  .step-body h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.4rem;
+  }
+
+  .step-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* Terminal mockup */
+  .terminal {
+    background: #0d0d12;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), var(--glow);
+  }
+
+  .terminal-bar {
+    background: #1a1a22;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .t-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .t-dot:nth-child(1) { background: #ff5f57; }
+  .t-dot:nth-child(2) { background: #ffbd2e; }
+  .t-dot:nth-child(3) { background: #28c840; }
+
+  .terminal-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 2;
+  }
+
+  .t-line { display: block; }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: #c8d3f5; }
+  .t-ok { color: #28c840; }
+  .t-warn { color: #ffbd2e; }
+  .t-info { color: var(--text-muted); }
+  .t-cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--accent);
+    vertical-align: middle;
+    animation: blink 1s infinite;
+  }
+
+  /* ── CONSOLE SECTION ── */
+  .consoles {
+    padding: 7rem 5%;
+  }
+
+  .consoles-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .consoles-header p {
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .consoles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .console-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+
+  .console-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 20px rgba(0,229,255,0.08);
+  }
+
+  .console-emoji { font-size: 2.8rem; display: block; margin-bottom: 1rem; }
+
+  .console-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .console-card p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* ── PRICING ── */
+  .pricing {
+    padding: 7rem 5%;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pricing-header {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .pricing-header p {
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-weight: 300;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .price-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(0,229,255,0.04), var(--bg));
+  }
+
+  .price-card.featured::before {
+    content: 'POPULAR';
+    position: absolute;
+    top: -1px; right: 1.5rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .price-card:hover { border-color: var(--accent); }
+
+  .price-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+
+  .price-unit {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+    margin-bottom: 2rem;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .price-features li {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 7rem 5%;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info p {
+    color: var(--text-muted);
+    margin: 1rem 0 2.5rem;
+    font-weight: 300;
+  }
+
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-detail:first-of-type { border-top: 1px solid var(--border); }
+
+  .contact-icon { font-size: 1.2rem; width: 30px; text-align: center; }
+
+  .contact-detail-text strong {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-detail-text span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 0.9rem 1rem;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
+  }
+
+  .form-group select option { background: var(--surface); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.35);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copy {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .how-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    h1 { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Tech<span>Fix</span></div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#consolas">Consolas</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Servicio Técnico Profesional</div>
+    <h1>
+      REPARA.<br>
+      <span class="line2">OPTIMIZA.</span><br>
+      DOMINA.
+    </h1>
+    <p class="hero-sub">
+      Limpieza profunda de PC y consolas, instalación de sistemas operativos,
+      optimización de rendimiento, armado de equipos a medida y mucho más.
+    </p>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">⚡ Pedir Turno</a>
+      <a href="#servicios" class="btn-ghost">Ver Servicios →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Equipos reparados</div>
+      </div>
+      <div>
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Clientes satisfechos</div>
+      </div>
+      <div>
+        <div class="stat-num">24h</div>
+        <div class="stat-label">Tiempo promedio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LIMPIEZA DE PC</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> ARMADO DE EQUIPOS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> INSTALACIÓN DE WINDOWS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LIMPIEZA DE CONSOLAS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> OPTIMIZACIÓN</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> INSTALACIÓN DE PROGRAMAS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LINUX / MAC OS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> PLAYSTATION · XBOX · NINTENDO</span>
+    <!-- duplicate -->
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LIMPIEZA DE PC</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> ARMADO DE EQUIPOS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> INSTALACIÓN DE WINDOWS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LIMPIEZA DE CONSOLAS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> OPTIMIZACIÓN</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> INSTALACIÓN DE PROGRAMAS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> LINUX / MAC OS</span>
+    <span class="marquee-item"><span class="marquee-dot">◆</span> PLAYSTATION · XBOX · NINTENDO</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="services-header">
+    <div class="section-label">// 01 — Servicios</div>
+    <h2>TODO LO QUE TU EQUIPO NECESITA</h2>
+    <p>Soluciones completas para mantener tu PC y consolas en el máximo rendimiento.</p>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <span class="service-line"></span>
+      <span class="service-icon">🧹</span>
+      <h3>Limpieza de PC</h3>
+      <p>Limpieza interna y externa de polvo, cambio de pasta térmica, limpieza de ventiladores y disipadores. Tu equipo vuelve a respirar y bajar temperaturas de inmediato.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">02</span>
+      <span class="service-line"></span>
+      <span class="service-icon">🖥️</span>
+      <h3>Instalación de SO</h3>
+      <p>Instalación limpia de Windows 10/11, Linux (Ubuntu, Mint, Arch) y macOS. Configuración completa, drivers, actualizaciones y sistema listo para usar.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">03</span>
+      <span class="service-line"></span>
+      <span class="service-icon">⚡</span>
+      <h3>Optimización</h3>
+      <p>Ajuste fino del sistema, limpieza de archivos basura, configuración de inicio, overclock seguro y tweaks para maximizar el rendimiento en juegos y trabajo.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">04</span>
+      <span class="service-line"></span>
+      <span class="service-icon">📦</span>
+      <h3>Instalación de Programas</h3>
+      <p>Office, Adobe Suite, software de diseño, herramientas de desarrollo, antivirus y cualquier programa que necesites. Todo licenciado y configurado correctamente.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">05</span>
+      <span class="service-line"></span>
+      <span class="service-icon">🔧</span>
+      <h3>Armado de PC</h3>
+      <p>Asesoramiento personalizado, selección de componentes y armado profesional. PC de gaming, workstation o uso general. Garantía de ensamble y testeo completo.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-number">06</span>
+      <span class="service-line"></span>
+      <span class="service-icon">🎮</span>
+      <h3>Limpieza de Consolas</h3>
+      <p>Limpieza interna de PS4, PS5, Xbox, Nintendo Switch y más. Cambio de pasta térmica, limpieza de lectores y mantenimiento completo para que dure muchos años más.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="proceso">
+  <div class="how-inner">
+    <div>
+      <div class="section-label">// 02 — Proceso</div>
+      <h2>SIMPLE Y SIN VUELTAS</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h4>Contacto y diagnóstico</h4>
+            <p>Describís el problema o el servicio que necesitás. Te respondemos rápido con un diagnóstico inicial y presupuesto sin cargo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h4>Retiro o trae el equipo</h4>
+            <p>Podés traer tu equipo o coordinamos retiro a domicilio en La Plata y zona. Sin complicaciones.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h4>Trabajo profesional</h4>
+            <p>Realizamos el servicio con cuidado y te mantenemos informado en todo momento. Sin sorpresas.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h4>Entrega y garantía</h4>
+            <p>Equipo entregado testeado y listo. Garantía de 30 días en todos los servicios realizados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <div class="t-dot"></div>
+        <span class="terminal-title">techfix_diagnostico.sh</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">./diagnostico --full</span></span>
+        <span class="t-line"><span class="t-info">→ Escaneando hardware...</span></span>
+        <span class="t-line"><span class="t-ok">✓ CPU: Intel i7-12700K</span></span>
+        <span class="t-line"><span class="t-ok">✓ RAM: 16GB DDR4</span></span>
+        <span class="t-line"><span class="t-warn">⚠ Temperatura CPU: 94°C</span></span>
+        <span class="t-line"><span class="t-warn">⚠ Polvo acumulado: CRÍTICO</span></span>
+        <span class="t-line"><span class="t-info">→ Analizando sistema...</span></span>
+        <span class="t-line"><span class="t-warn">⚠ Inicio lento: 87s</span></span>
+        <span class="t-line"><span class="t-warn">⚠ Procesos basura: 43</span></span>
+        <span class="t-line"><span class="t-info">→ Plan de acción:</span></span>
+        <span class="t-line"><span class="t-ok">✓ Limpieza profunda</span></span>
+        <span class="t-line"><span class="t-ok">✓ Pasta térmica nueva</span></span>
+        <span class="t-line"><span class="t-ok">✓ Optimización SO</span></span>
+        <span class="t-line"><span class="t-info">→ Tiempo estimado: 24h</span></span>
+        <span class="t-line"><span class="t-prompt">$</span> <span class="t-cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSOLAS -->
+<section class="consoles" id="consolas">
+  <div class="consoles-header">
+    <div class="section-label">// 03 — Consolas</div>
+    <h2>TODAS LAS PLATAFORMAS</h2>
+    <p>Servicio técnico especializado para las consolas más populares del mercado.</p>
+  </div>
+
+  <div class="consoles-grid">
+    <div class="console-card">
+      <span class="console-emoji">🎮</span>
+      <h4>PlayStation 5</h4>
+      <p>Limpieza, pasta térmica, ventilador</p>
+    </div>
+    <div class="console-card">
+      <span class="console-emoji">🎮</span>
+      <h4>PlayStation 4</h4>
+      <p>Pro y Slim incluidos</p>
+    </div>
+    <div class="console-card">
+      <span class="console-emoji">🕹️</span>
+      <h4>Xbox Series</h4>
+      <p>X/S y One, servicio completo</p>
+    </div>
+    <div class="console-card">
+      <span class="console-emoji">🃏</span>
+      <h4>Nintendo Switch</h4>
+      <p>OLED, Lite y original</p>
+    </div>
+    <div class="console-card">
+      <span class="console-emoji">📀</span>
+      <h4>Generaciones Prev.</h4>
+      <p>PS3, Xbox 360, Wii y más</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="precios">
+  <div class="pricing-header">
+    <div class="section-label">// 04 — Precios</div>
+    <h2>PRECIOS CLAROS, SIN SORPRESAS</h2>
+    <p>Presupuesto sin cargo. Pagás solo si aceptás. Todos los precios en pesos argentinos.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Básico</div>
+      <div class="price-amount">$8.000</div>
+      <div class="price-unit">Precio desde</div>
+      <ul class="price-features">
+        <li>Limpieza externa de PC</li>
+        <li>Diagnóstico completo</li>
+        <li>Limpieza de polvo básica</li>
+        <li>Informe del estado del equipo</li>
+      </ul>
+      <a href="#contacto" class="btn-ghost" style="display:block;text-align:center;text-decoration:none;">Consultar →</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-name">Estándar</div>
+      <div class="price-amount">$15.000</div>
+      <div class="price-unit">Precio desde</div>
+      <ul class="price-features">
+        <li>Limpieza interna profunda</li>
+        <li>Cambio de pasta térmica</li>
+        <li>Reinstalación del SO</li>
+        <li>Instalación de programas esenciales</li>
+        <li>Optimización del sistema</li>
+      </ul>
+      <a href="#contacto" class="btn-primary" style="display:block;text-align:center;text-decoration:none;">Pedir Turno →</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Premium</div>
+      <div class="price-amount">$25.000</div>
+      <div class="price-unit">Precio desde</div>
+      <ul class="price-features">
+        <li>Todo lo del plan Estándar</li>
+        <li>Armado / Actualización de PC</li>
+        <li>Asesoramiento de componentes</li>
+        <li>Overclock y tweaking</li>
+        <li>Soporte post-servicio 30 días</li>
+      </ul>
+      <a href="#contacto" class="btn-ghost" style="display:block;text-align:center;text-decoration:none;">Consultar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">// 05 — Contacto</div>
+      <h2>¿LISTO PARA EMPEZAR?</h2>
+      <p>Mandanos tu consulta y te respondemos en menos de 2 horas. Sin vueltas, sin esperas.</p>
+
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div class="contact-detail-text">
+          <strong>WhatsApp</strong>
+          <span>+54 221 XXX-XXXX</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📧</div>
+        <div class="contact-detail-text">
+          <strong>Email</strong>
+          <span>hola@techfix.com.ar</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail-text">
+          <strong>Zona de cobertura</strong>
+          <span>La Plata y alrededores</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail-text">
+          <strong>Horario</strong>
+          <span>Lun–Sáb 09:00 – 20:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre completo">
+      </div>
+      <div class="form-group">
+        <label>WhatsApp / Teléfono</label>
+        <input type="tel" placeholder="+54 221 ...">
+      </div>
+      <div class="form-group">
+        <label>Servicio que necesitás</label>
+        <select>
+          <option value="" disabled selected>Seleccioná un servicio</option>
+          <option>Limpieza de PC</option>
+          <option>Instalación de Sistema Operativo</option>
+          <option>Optimización del sistema</option>
+          <option>Instalación de programas</option>
+          <option>Armado de PC</option>
+          <option>Limpieza de consola</option>
+          <option>Otro / Consulta general</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Descripción del problema (opcional)</label>
+        <textarea placeholder="Contanos qué le pasa a tu equipo o qué necesitás..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('¡Mensaje enviado! Te contactamos pronto 🚀')">
+        Enviar Consulta →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Tech<span>Fix</span></div>
+  <p class="footer-copy">© 2025 TechFix — La Plata, Buenos Aires</p>
+  <ul class="footer-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#precios">Precios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
